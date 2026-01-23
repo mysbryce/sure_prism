@@ -19,6 +19,7 @@ local LoadResourceFile = LoadResourceFile
 
 --- Must be manually updated
 local moduleRoutes = {
+  'lib/utils/table.lua',
   'lib/utils/is-array.lua',
   'lib/utils/validate-builder.lua',
 

@@ -121,6 +121,24 @@ function prism:object(fields, options)
   return builder
 end
 
+---@param objectBuilder ObjectChainBuilder
+---@param fields table<string, ChainBuilder>
+---@param options CustomOptions | nil
+function prism:extends(objectBuilder, fields, options)
+  if type(objectBuilder) ~= 'table' then
+    error('Object builder must be a table')
+  end
+
+  if type(fields) ~= 'table' then
+    error('Fields must be a table')
+  end
+
+  objectBuilder.metadata.fields = mergeTable(objectBuilder.metadata.fields, fields)
+  objectBuilder.metadata.options = options or {}
+
+  return objectBuilder
+end
+
 ---@param element ChainBuilder
 ---@param options CustomOptions | nil
 function prism:array(element, options)

@@ -89,7 +89,7 @@ shared_scripts {
 
 ```lua
 local playerValidation <const> = prism:object({
-	ssn = prism:string()
+  ssn = prism:string()
 })
 
 local validPlayer <const> = { ssn = "123456789" }
@@ -170,20 +170,20 @@ local validNewNil <const> = playerNilNameValidation.parse(nil)
 
 ```lua
 local playerValidation <const> = prism:object({
-	name = prism:string().min(1).max(10),
+  name = prism:string().min(1).max(10),
 })
 
 -- Will remove the `job` field since it is not present in the schema
 local nonPassthroughParsed <const> = playerValidation.parse({
-	name = "John",
-	job = "Police",
+  name = "John",
+  job = "Police",
 })
 print(json.encode(nonPassthroughParsed)) -- { name = "John" }
 
 -- Will keep the `job` field since `.passthrough()` is appended.
 local passthroughParsed <const> = playerValidation.passthrough().parse({
-	name = "John",
-	job = "Police",
+  name = "John",
+  job = "Police",
 })
 print(json.encode(passthroughParsed)) -- { name = "John", job = "Police" }
 ```
