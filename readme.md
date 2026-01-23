@@ -1,6 +1,13 @@
-# sure_prism - Data validation builder
+# Prism - Data validation builder
 
-`sure_prism` ( validationBuilder ) is a tool that is focused on building validation schemas to ensure that the data received matches a specific specification.
+`sure_prism` (Validation Builder) is a tool that is focused on building validation schemas to ensure that the data received matches a specific specification.
+
+## Fork Purpose
+
+Purpose This fork is maintained for use across my upcoming development resources. While it retains the core logic of the original Lua data validation library, I am actively extending it to include:
+  - Custom Validation Rules: Tailored specifically for my project requirements.
+  - Enhanced Performance: Optimizations for high-frequency resource calls.
+  - Bug Fixes & Compatibility: Ensuring seamless integration with modern Lua environments.
 
 ## Setup
 
