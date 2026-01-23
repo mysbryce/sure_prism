@@ -3,6 +3,10 @@ function prism:string(options)
   ---@class StringChainBuilder: ChainBuilder
   ---@field min fun(min: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a minimum value for a string
   ---@field max fun(max: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a maximum value for a string
+  ---@field startsWith fun(textToSearch: string, errorMessage: ErrorMessage): StringChainBuilder
+  ---@field endsWith fun(textToSearch: string, errorMessage: ErrorMessage): StringChainBuilder
+  ---@field email fun(errorMessage: ErrorMessage): StringChainBuilder
+  ---@field identifier fun(target: IdentifierType | IdentifierType[] | nil, errorMessage: ErrorMessage): StringChainBuilder
   ---@field optional fun(): StringChainBuilder Accepts a nil value
   local builder = {}
 
@@ -16,10 +20,11 @@ function prism:string(options)
   builder.parse = validationParse(builder)
   builder.min = PrimitiveMethods.min(builder)
   builder.max = PrimitiveMethods.max(builder)
-  builder.optional = PrimitiveMethods.optional(builder)
   builder.startsWith = PrimitiveMethods.startsWith(builder)
   builder.endsWith = PrimitiveMethods.endsWith(builder)
   builder.email = PrimitiveMethods.email(builder)
+  builder.identifier = PrimitiveMethods.identifier(builder)
+  builder.optional = PrimitiveMethods.optional(builder)
 
   return builder
 end
