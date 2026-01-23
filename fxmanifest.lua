@@ -22,3 +22,5 @@ shared_scripts {
 
   'init.lua'
 }
+
+provide 'lua-vBuilder-fivem'
