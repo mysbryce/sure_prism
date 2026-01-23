@@ -18,6 +18,8 @@
 ---@field element ChainBuilder | nil The element of the array
 ---@field enums string[] | nil The enums for the validation
 ---@field unionBuilders ChainBuilder[] | nil The builders for the union
+---@field startsWith string | nil Check that target string exists on first of text
+---@field endsWith string | nil Check that target string exists on first of text
 
 ---@class Validation
 ---@field validate ValidationMethod

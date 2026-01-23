@@ -7,6 +7,9 @@ ValidationCodes = {
   InvalidType = 'invalid_type',
   InvalidEnum = 'invalid_enum',
   InvalidUnion = 'invalid_union',
+  InvalidEmail = 'invalid_email',
+  MissingStartsWith = 'missing_starts_with',
+  MissingEndsWith = 'missing_ends_with',
 }
 
 ---@enum AllowedPrimitiveBuilderType

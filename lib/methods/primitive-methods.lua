@@ -99,3 +99,92 @@ function PrimitiveMethods.optional(builder)
     return builder
   end
 end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.startsWith(builder)
+  ---@param textToSearch string
+  return function(textToSearch, errorMessage)
+    if type(textToSearch) ~= 'string' then
+      error('textToSearch must be a string')
+    end
+
+    builder.metadata.additional = builder.metadata.additional or {}
+
+    ---@type Validation
+    local validation = {
+      validate = function(value)
+        if not value:sub(1, #textToSearch) == textToSearch then
+          return {
+            path = '',
+            code = ValidationCodes.MissingStartsWith,
+            message = errorMessage or ('Could not find target text. Searched %s, Input: %s'):format(textToSearch, value),
+          }
+        end
+
+        return true
+      end,
+    }
+
+    table.insert(builder.metadata.additional, validation)
+
+    return builder
+  end
+end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.endsWith(builder)
+  ---@param textToSearch string
+  return function(textToSearch, errorMessage)
+    if type(textToSearch) ~= 'string' then
+      error('textToSearch must be a string')
+    end
+
+    builder.metadata.additional = builder.metadata.additional or {}
+
+    ---@type Validation
+    local validation = {
+      validate = function(value)
+        if not value:sub(1, #textToSearch) == textToSearch then
+          return {
+            path = '',
+            code = ValidationCodes.MissingEndsWith,
+            message = errorMessage or ('Could not find target text. Searched %s, Input: %s'):format(textToSearch, value),
+          }
+        end
+
+        return true
+      end,
+    }
+
+    table.insert(builder.metadata.additional, validation)
+
+    return builder
+  end
+end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.email(builder)
+  return function(errorMessage)
+    builder.metadata.additional = builder.metadata.additional or {}
+
+    ---@type Validation
+    local validation = {
+      validate = function(value)
+        local pattern = '^[%w%.%_%-]+@[%w%.%_%-]+%.[%w%.%_%-]+$'
+        if value:match(pattern) == nil then
+          return {
+            path = '',
+            code = ValidationCodes.InvalidEmail,
+            message = errorMessage or ('Target string could not match email pattern. Input: %s'):format(value),
+          }
+        end
+
+        return true
+      end,
+    }
+
+    table.insert(builder.metadata.additional, validation)
+
+    return builder
+  end
+end

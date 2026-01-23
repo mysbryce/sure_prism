@@ -115,7 +115,7 @@ function validationParse(builder)
         Failed to parse the provided value. This is likely due to an issue
         within the parser.
 
-        Please open an issue at `https://github.com/aquapha/lua-vBuilder-fivem/issues/new`
+        Please open an issue at `https://github.com/mysbryce/sure_prism/issues/new`
         with the validation chain that caused this error and the error code.
     ]])
 

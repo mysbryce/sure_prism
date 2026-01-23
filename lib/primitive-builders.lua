@@ -17,6 +17,9 @@ function prism:string(options)
   builder.min = PrimitiveMethods.min(builder)
   builder.max = PrimitiveMethods.max(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.startsWith = PrimitiveMethods.startsWith(builder)
+  builder.endsWith = PrimitiveMethods.endsWith(builder)
+  builder.email = PrimitiveMethods.email(builder)
 
   return builder
 end
