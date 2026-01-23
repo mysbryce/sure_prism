@@ -25,6 +25,7 @@ shared_scripts {
 
 - Arrays: `prism:array(ChainBuilder, CustomOptions | nil)`
 - Objects: `prism:object(table<string, ChainBuilder>, CustomOptions | nil)`
+- Extends: `prism:extends(ObjectChainBuilder, table<string, ChainBuilder>, CustomOptions | nil)`
 - Strings: `prism:string(CustomOptions | nil)`
 - Numbers: `prism:number(CustomOptions | nil)`
 - Enums: `prism:enum(string[], CustomOptions | nil)`
