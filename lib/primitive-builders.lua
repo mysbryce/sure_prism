@@ -103,6 +103,7 @@ function prism:object(fields, options)
 
   ---@class ObjectChainBuilder: ChainBuilder
   ---@field passthrough fun(): ObjectChainBuilder Allows values that don't exist in the schema to pass through
+  ---@field catchall fun(): ObjectChainBuilder Accepts a nil value
   ---@field optional fun(): ObjectChainBuilder Accepts a nil value
   local builder = {}
 
@@ -116,7 +117,9 @@ function prism:object(fields, options)
   builder.parse = validationParse(builder)
   builder.optional = PrimitiveMethods.optional(builder)
 
+  ---@deprecated Please use catchall, it can be removed at any time
   builder.passthrough = TableMethods.passthrough(builder)
+  builder.catchall = TableMethods.passthrough(builder)
 
   return builder
 end
