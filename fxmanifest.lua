@@ -4,7 +4,7 @@ lua54 'yes'
 
 name 'Prism'
 author 'aquapha, forked by mysbryce'
-version '1.0.2'
+version '1.0.3'
 description 'A validation builder for lua'
 
 shared_scripts {
