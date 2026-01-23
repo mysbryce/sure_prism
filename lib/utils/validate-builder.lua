@@ -10,7 +10,7 @@ function throwInvalidBuilderError(code)
       in the validation chain. Please check the validation chain and ensure that it is
       setup correctly.
 
-      If setup correctly, please open an issue at `https://github.com/aquapha/lua-vBuilder-fivem/issues/new`
+      If setup correctly, please open an issue at `https://github.com/mysbryce/sure_prism/issues/new`
       with the validation chain that caused this error and the error code.
   ]]):format(code))
 end
@@ -19,19 +19,19 @@ end
 ---@param builder ChainBuilder
 ---@diagnostic disable-next-line: lowercase-global
 function validateBuilder(builder)
-  if (type(builder) ~= "table") then
-    throwInvalidBuilderError("invalid_builder_type")
+  if type(builder) ~= 'table' then
+    throwInvalidBuilderError('invalid_builder_type')
   end
 
-  if (type(builder.metadata) ~= "table") then
-    throwInvalidBuilderError("invalid_builder_metadata_type")
+  if type(builder.metadata) ~= 'table' then
+    throwInvalidBuilderError('invalid_builder_metadata_type')
   end
 
   for _, allowedPrimitiveBuilderType in pairs(AllowedPrimitiveBuilderTypes) do
-    if (builder.metadata.type == allowedPrimitiveBuilderType) then
+    if builder.metadata.type == allowedPrimitiveBuilderType then
       return
     end
   end
 
-  throwInvalidBuilderError("invalid_builder_primitive_type")
+  throwInvalidBuilderError('invalid_builder_primitive_type')
 end

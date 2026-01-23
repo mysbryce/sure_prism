@@ -3,16 +3,16 @@ if (not _VERSION:find("5.4")) then
   error("^1Lua 5.4 must be enabled in the resource manifest!^0", 2)
 end
 
-local lua_vBuilder_fivem = "lua-vBuilder-fivem"
+local surePrism = "sure_prism"
 local resourceName = GetCurrentResourceName()
 
 --- Avoid initializing the module if it's within itself
-if (resourceName == lua_vBuilder_fivem) then
+if (resourceName == surePrism) then
   return
 end
 
-if (GetResourceState(lua_vBuilder_fivem) ~= "started") then
-  error("^1lua-vBuilder-fivem must be started before this resource.^0", 0)
+if (GetResourceState(surePrism) ~= "started") then
+  error("^1sure_prism must be started before this resource.^0", 0)
 end
 
 local LoadResourceFile = LoadResourceFile
@@ -40,7 +40,7 @@ local moduleRoutes = {
 
 ---@param module string
 local function loadModule(module)
-  local chunk = LoadResourceFile(lua_vBuilder_fivem, module)
+  local chunk = LoadResourceFile(surePrism, module)
 
   if (not chunk) then return end
 

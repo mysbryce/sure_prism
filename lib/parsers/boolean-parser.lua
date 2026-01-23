@@ -4,12 +4,13 @@
 ---@diagnostic disable-next-line: lowercase-global
 function booleanParser(builder)
   return function(value)
-    if (type(value) ~= "boolean") then
-      return nil, {
-        path = "",
-        code = ValidationCodes.InvalidType,
-        message = builder.metadata.options.invalidTypeMessage or ("Invalid type. Received: %s, expected: boolean"):format(type(value))
-      }
+    if type(value) ~= 'boolean' then
+      return nil,
+        {
+          path = '',
+          code = ValidationCodes.InvalidType,
+          message = builder.metadata.options.invalidTypeMessage or ('Invalid type. Received: %s, expected: boolean'):format(type(value)),
+        }
     end
 
     return value, nil

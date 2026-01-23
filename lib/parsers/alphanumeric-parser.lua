@@ -7,7 +7,7 @@ function alphanumericParser(builder)
     for _, additionalParser in ipairs(builder.metadata.additional) do
       local valueOrError = additionalParser.validate(value)
 
-      if (type(valueOrError) == "table") then
+      if type(valueOrError) == 'table' then
         return nil, valueOrError
       end
     end

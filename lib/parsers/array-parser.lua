@@ -7,12 +7,13 @@ function arrayParser(builder)
     for index, item in ipairs(value) do
       local parsedValue, error = builder.metadata.element.parse(item)
 
-      if (error) then
-        return nil, {
-          code = error.code,
-          message = error.message,
-          path = ("%s%s"):format(index, string.len(error.path) > 0 and (".%s"):format(error.path) or ""),
-        }
+      if error then
+        return nil,
+          {
+            code = error.code,
+            message = error.message,
+            path = ('%s%s'):format(index, string.len(error.path) > 0 and ('.%s'):format(error.path) or ''),
+          }
       end
 
       value[index] = parsedValue

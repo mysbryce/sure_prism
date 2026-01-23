@@ -1,8 +1,6 @@
-<img src="https://i.imgur.com/VW17b7j.png" style="display: block; margin: 0 auto; margin-bottom: 40px;" />
+# sure_prism - Data validation builder
 
-# vBuilder - Data validation builder
-
-`vBuilder` ( validationBuilder ) is a tool that is focused on building validation schemas to ensure that the data received matches a specific specification.
+`sure_prism` ( validationBuilder ) is a tool that is focused on building validation schemas to ensure that the data received matches a specific specification.
 
 ## Setup
 
@@ -10,7 +8,7 @@ This resource exposes an initialization file, to use it, simply add the followin
 
 ```lua
 shared_scripts {
-  '@lua-vBuilder-fivem/init.lua',
+  '@sure_prism/init.lua',
 }
 ```
 

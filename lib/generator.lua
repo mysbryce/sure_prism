@@ -33,9 +33,9 @@
 
 ---@class PrimitiveBuilder
 ---@field metadata PrimitiveMetadata The metadata for the primitive validation
-vBuilder = {}
+prism = {}
 
--- Register an export for other resources to be able to use the vBuilder
-exports("vBuilder", function()
-  return vBuilder
+-- Register an export for other resources to be able to use the Prism
+exports('getPrism', function()
+  return prism
 end)

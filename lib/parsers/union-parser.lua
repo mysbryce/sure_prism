@@ -12,7 +12,7 @@ function unionParser(builder)
     for _, unionBuilder in ipairs(builder.metadata.unionBuilders) do
       local parsed, unionError = unionBuilder.parse(value)
 
-      if (parsed) then
+      if parsed then
         return parsed, nil
       end
 
@@ -22,15 +22,17 @@ function unionParser(builder)
 
     -- If all errors are type errors, it means that the value is not a valid union
     for _, unionError in ipairs(unionErrors) do
-      if (unionError.code ~= ValidationCodes.InvalidType) then
+      if unionError.code ~= ValidationCodes.InvalidType then
         return nil, unionError
       end
     end
 
-    return nil, {
-      path = "",
-      code = ValidationCodes.InvalidUnion,
-      message = builder.metadata.options.invalidTypeMessage or ("Invalid union. Received: %s, expected: %s"):format(type(value), table.concat(acceptedUnionTypes, ", "))
-    }
+    return nil,
+      {
+        path = '',
+        code = ValidationCodes.InvalidUnion,
+        message = builder.metadata.options.invalidTypeMessage
+          or ('Invalid union. Received: %s, expected: %s'):format(type(value), table.concat(acceptedUnionTypes, ', ')),
+      }
   end
 end

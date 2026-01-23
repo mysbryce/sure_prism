@@ -1,5 +1,5 @@
 ---@param options CustomOptions | nil
-function vBuilder:string(options)
+function prism:string(options)
   ---@class StringChainBuilder: ChainBuilder
   ---@field min fun(min: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a minimum value for a string
   ---@field max fun(max: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a maximum value for a string
@@ -7,7 +7,7 @@ function vBuilder:string(options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "string"
+  builder.metadata.type = 'string'
   builder.metadata.required = true
   builder.metadata.additional = {}
   builder.metadata.passUndefined = false
@@ -22,7 +22,7 @@ function vBuilder:string(options)
 end
 
 ---@param options CustomOptions | nil
-function vBuilder:number(options)
+function prism:number(options)
   ---@class NumberChainBuilder: ChainBuilder
   ---@field min fun(min: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a minimum value for a number
   ---@field max fun(max: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a maximum value for a number
@@ -30,7 +30,7 @@ function vBuilder:number(options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "number"
+  builder.metadata.type = 'number'
   builder.metadata.required = true
   builder.metadata.additional = {}
   builder.metadata.passUndefined = false
@@ -46,9 +46,9 @@ end
 
 ---@param enums string[]
 ---@param options CustomOptions | nil
-function vBuilder:enum(enums, options)
-  if (type(enums) ~= "table" or not isArray(enums) or #enums <= 0) then
-    error("Options must be a non-empty array")
+function prism:enum(enums, options)
+  if type(enums) ~= 'table' or not isArray(enums) or #enums <= 0 then
+    error('Options must be a non-empty array')
   end
 
   ---@class EnumChainBuilder: ChainBuilder
@@ -56,7 +56,7 @@ function vBuilder:enum(enums, options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "enum"
+  builder.metadata.type = 'enum'
   builder.metadata.enums = enums
   builder.metadata.required = true
   builder.metadata.passUndefined = false
@@ -64,19 +64,19 @@ function vBuilder:enum(enums, options)
 
   builder.parse = validationParse(builder)
   builder.optional = PrimitiveMethods.optional(builder)
-  
+
   return builder
 end
 
 ---@param options CustomOptions | nil
-function vBuilder:boolean(options)
+function prism:boolean(options)
   ---@class BooleanChainBuilder: ChainBuilder
   ---@field optional fun(): BooleanChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
   builder.metadata.required = true
-  builder.metadata.type = "boolean"
+  builder.metadata.type = 'boolean'
   builder.metadata.passUndefined = false
   builder.metadata.options = options or {}
 
@@ -88,9 +88,9 @@ end
 
 ---@param fields table<string, ChainBuilder>
 ---@param options CustomOptions | nil
-function vBuilder:object(fields, options)
-  if (type(fields) ~= "table" or (isArray(fields) and #fields > 0)) then
-    error("Fields must be a table")
+function prism:object(fields, options)
+  if type(fields) ~= 'table' or (isArray(fields) and #fields > 0) then
+    error('Fields must be a table')
   end
 
   ---@class ObjectChainBuilder: ChainBuilder
@@ -99,7 +99,7 @@ function vBuilder:object(fields, options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "object"
+  builder.metadata.type = 'object'
   builder.metadata.required = true
   builder.metadata.fields = fields
   builder.metadata.passUndefined = false
@@ -115,14 +115,14 @@ end
 
 ---@param element ChainBuilder
 ---@param options CustomOptions | nil
-function vBuilder:array(element, options)
-  if (type(element) ~= "table") then
-    error("Element must be a ChainBuilder")
+function prism:array(element, options)
+  if type(element) ~= 'table' then
+    error('Element must be a ChainBuilder')
   end
 
   -- Don't allow unions in arrays
-  if (element.metadata.type == "union") then
-    error("Unions are not allowed in arrays")
+  if element.metadata.type == 'union' then
+    error('Unions are not allowed in arrays')
   end
 
   ---@class ArrayChainBuilder: ChainBuilder
@@ -132,7 +132,7 @@ function vBuilder:array(element, options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "array"
+  builder.metadata.type = 'array'
   builder.metadata.additional = {}
   builder.metadata.required = true
   builder.metadata.element = element
@@ -149,9 +149,9 @@ end
 
 ---@param builders ChainBuilder[]
 ---@param options CustomOptions | nil
-function vBuilder:union(builders, options)
-  if (type(builders) ~= "table" or not isArray(builders)) then
-    error("Builders must be an array")
+function prism:union(builders, options)
+  if type(builders) ~= 'table' or not isArray(builders) then
+    error('Builders must be an array')
   end
 
   ---@class UnionChainBuilder: ChainBuilder
@@ -159,7 +159,7 @@ function vBuilder:union(builders, options)
   local builder = {}
 
   builder.metadata = {}
-  builder.metadata.type = "union"
+  builder.metadata.type = 'union'
   builder.metadata.required = true
   builder.metadata.passUndefined = false
   builder.metadata.options = options or {}

@@ -2,8 +2,8 @@ fx_version 'cerulean'
 games { 'gta5', 'rdr3' }
 lua54 'yes'
 
-name 'vBuilder'
-author 'aquapha'
+name 'Prism'
+author 'aquapha, forked by mysbryce'
 version '1.0.0'
 description 'A validation builder for lua'
 
