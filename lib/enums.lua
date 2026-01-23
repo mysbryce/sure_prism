@@ -10,6 +10,7 @@ ValidationCodes = {
   InvalidEmail = 'invalid_email',
   MissingStartsWith = 'missing_starts_with',
   MissingEndsWith = 'missing_ends_with',
+  InvalidIdentifier = 'invalid_identifier',
 }
 
 ---@enum AllowedPrimitiveBuilderType
