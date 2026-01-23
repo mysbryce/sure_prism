@@ -1,3 +1,5 @@
+<img src="https://i.ibb.co/JWYjSnpw/Untitled-2025-11-18-1706-1.webp" />
+
 # Prism - Data validation builder
 
 `sure_prism` (Validation Builder) is a tool that is focused on building validation schemas to ensure that the data received matches a specific specification.
