@@ -41,12 +41,23 @@ shared_scripts {
 
 ## Additional validation methods
 
-- `min(number, CustomOptions | nil)`
+- `startsWith(textToSearch, errorMessage?)`
+  - `textToSearch` Define text to search in the begin of text
+  - Allowed on data types:
+    - String
+- `endsWith(textToSearch, errorMessage?)`
+  - `textToSearch` Define text to search in the end of text
+  - Allowed on data types:
+    - String
+- `email(errorMessage?)` Validate that text is correct an email pattern
+  - Allowed on data types:
+    - String
+- `min(number, errorMessage?)`
   - `number` Indicates the lowest amount of the value for it to be valid:
     - Number - Size
     - String - Length of string
     - Array - Length of elements
-- `max(number, CustomOptions | nil)`
+- `max(number, errorMessage?)`
   - `number` - Indicates the highest amount of the value for it to be valid:
     - Number - Size
     - String - Length of string
