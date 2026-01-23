@@ -39,3 +39,7 @@ prism = {}
 exports('getPrism', function()
   return prism
 end)
+
+-- Make it supports ox_lib
+lib = lib or {}
+lib.prism = prism
