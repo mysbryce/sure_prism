@@ -54,6 +54,16 @@ shared_scripts {
 - `email(errorMessage?)` Validate that text is correct an email pattern
   - Allowed on data types:
     - String
+- `identifier(target: IdentifierType | IdentifierType[] | nil,errorMessage?)` Validate that text is correct an email pattern
+  - `IdentifierType` contains
+    - `steam`
+    - `discord`
+    - `license`
+    - `license2`
+    - `fivem`
+    - `xbl`
+  - Allowed on data types:
+    - String
 - `min(number, errorMessage?)`
   - `number` Indicates the lowest amount of the value for it to be valid:
     - Number - Size
