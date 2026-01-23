@@ -14,16 +14,16 @@ shared_scripts {
 
 ## Supported data types
 
-- Arrays: `vBuilder:array(ChainBuilder, CustomOptions | nil)`
-- Objects: `vBuilder:object(table<string, ChainBuilder>, CustomOptions | nil)`
-- Strings: `vBuilder:string(CustomOptions | nil)`
-- Numbers: `vBuilder:number(CustomOptions | nil)`
-- Enums: `vBuilder:enum(string[], CustomOptions | nil)`
-- Unions: `vBuilder:union(ChainBuilder[], CustomOptions | nil)`
+- Arrays: `prism:array(ChainBuilder, CustomOptions | nil)`
+- Objects: `prism:object(table<string, ChainBuilder>, CustomOptions | nil)`
+- Strings: `prism:string(CustomOptions | nil)`
+- Numbers: `prism:number(CustomOptions | nil)`
+- Enums: `prism:enum(string[], CustomOptions | nil)`
+- Unions: `prism:union(ChainBuilder[], CustomOptions | nil)`
 
 ## Naming
 
-- `ChainBuilder` - The builder that is generated from a initial data type builder `vBuilder:string()` will generate a specific `StringChainBuilder`
+- `ChainBuilder` - The builder that is generated from a initial data type builder `prism:string()` will generate a specific `StringChainBuilder`
 - `CustomOptions` - Custom options for invalid error messages `(table)`
   - `invalidTypeMessage` - Message displayed when a values type doesn't match
   - `requiredErrorMessage` - Message displayed when a value is `nil` but required
@@ -58,8 +58,8 @@ shared_scripts {
 ### Basic value object validation
 
 ```lua
-local playerValidation <const> = vBuilder:object({
-	ssn = vBuilder:string()
+local playerValidation <const> = prism:object({
+	ssn = prism:string()
 })
 
 local validPlayer <const> = { ssn = "123456789" }
@@ -80,7 +80,7 @@ print(json.encode(invalidError)) -- { code = "required", message = "Value is req
 ### Enum validation
 
 ```lua
-local playerJobEnum <const> = vBuilder:enum({ "Police", "Firefighter", "Doctor" })
+local playerJobEnum <const> = prism:enum({ "Police", "Firefighter", "Doctor" })
 
 local validJob <const> = playerJobEnum.parse("Police")
 print(validJob) -- "Police
@@ -95,12 +95,12 @@ print(json.encode(invalidJobError)) -- { code = "invalid_enum", message = "Value
 
 #### Caveats
 
-1. Cannot be used within an array: `vBuilder:array(vBuilder:union(...))`. This is due to the fact that the array builder expects a single type and not a union of types.
+1. Cannot be used within an array: `prism:array(prism:union(...))`. This is due to the fact that the array builder expects a single type and not a union of types.
 
 ```lua
-local playerJobNameOrIdUnion <const> = vBuilder:union({
-  vBuilder:string(),
-  vBuilder:number(),
+local playerJobNameOrIdUnion <const> = prism:union({
+  prism:string(),
+  prism:number(),
 })
 
 local validString <const> = playerJobNameOrIdUnion.parse("Police")
@@ -116,7 +116,7 @@ print(json.encode(invalidError)) -- { code = "invalid_union", message = "Invalid
 ### Methods `.min, .max, .optional`
 
 ```lua
-local playerNameValidation <const> = vBuilder:string().min(1).max(10)
+local playerNameValidation <const> = prism:string().min(1).max(10)
 
 -- ✅ Passes the validation since it is more than 1 characted and less than 10
 local valid = playerNameValidation.parse("John")
@@ -132,15 +132,15 @@ local _, nilError = playerNameValidation.parse(nil)
 -- ✅ Passes the validation since nil is allowed
 local validNil <const> = playerNameValidation.optional().parse(nil)
 -- Or
-local playerNilNameValidation <const> = vBuilder:string().min(1).max(10).optional()
+local playerNilNameValidation <const> = prism:string().min(1).max(10).optional()
 local validNewNil <const> = playerNilNameValidation.parse(nil)
 ```
 
 ### Method `.passthrough`
 
 ```lua
-local playerValidation <const> = vBuilder:object({
-	name = vBuilder:string().min(1).max(10),
+local playerValidation <const> = prism:object({
+	name = prism:string().min(1).max(10),
 })
 
 -- Will remove the `job` field since it is not present in the schema
@@ -161,8 +161,8 @@ print(json.encode(passthroughParsed)) -- { name = "John", job = "Police" }
 ### Custom error options
 
 ```lua
-local playerValidation <const> = vBuilder:object({
-  name = vBuilder:string({
+local playerValidation <const> = prism:object({
+  name = prism:string({
     requiredErrorMessage = "Name is required",
     invalidTypeMessage = "Name must be a string",
   }),
