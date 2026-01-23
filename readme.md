@@ -54,7 +54,7 @@ shared_scripts {
 - `email(errorMessage?)` Validate that text is correct an email pattern
   - Allowed on data types:
     - String
-- `identifier(target: IdentifierType | IdentifierType[] | nil,errorMessage?)` Validate that text is correct an identifier pattern
+- `identifier(target: IdentifierType | IdentifierType[] | nil, errorMessage?)` Validate that text is correct an identifier pattern
   - `IdentifierType` contains
     - `steam`
     - `discord`
