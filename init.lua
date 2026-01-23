@@ -46,7 +46,7 @@ local function loadModule(module)
     return
   end
 
-  local fun, err = load(chunk, ('@@lua-vBuilder-fivem/%s'):format(module))
+  local fun, err = load(chunk, ('@@sure_prism/%s'):format(module))
 
   if not fun or err then
     return error(('\n^1Error importing module (%s): %s^0'):format(module, err), 3)
