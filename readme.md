@@ -29,6 +29,7 @@ shared_scripts {
 - Extends: `prism:extends(ObjectChainBuilder, table<string, ChainBuilder>, CustomOptions | nil)`
 - Strings: `prism:string(CustomOptions | nil)`
 - Numbers: `prism:number(CustomOptions | nil)`
+- Booleans: `prism:boolean(CustomOptions | nil)`
 - Enums: `prism:enum(string[], CustomOptions | nil)`
 - Unions: `prism:union(ChainBuilder[], CustomOptions | nil)`
 
