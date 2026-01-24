@@ -20,6 +20,7 @@
 ---@field unionBuilders ChainBuilder[] | nil The builders for the union
 ---@field startsWith string | nil Check that target string exists on first of text
 ---@field endsWith string | nil Check that target string exists on first of text
+---@field default unknown Default value if it's nil or undefined
 
 ---@class Validation
 ---@field validate ValidationMethod

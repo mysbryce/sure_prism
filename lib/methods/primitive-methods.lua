@@ -250,3 +250,14 @@ function PrimitiveMethods.identifier(builder)
     return builder
   end
 end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.default(builder)
+  ---@generic T
+  ---@param defaultValue T
+  return function(defaultValue)
+    builder.metadata.default = defaultValue
+
+    return builder
+  end
+end

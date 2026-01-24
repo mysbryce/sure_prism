@@ -1,5 +1,5 @@
----@generic R
----@alias Parser fun(value: R): R, ValidationError | nil Parses the value
+---@generic T
+---@alias Parser fun(value: T): T, ValidationError | nil Parses the value
 
 ---@description Parser for a built validation chain
 ---@param builder ChainBuilder
@@ -9,6 +9,10 @@ function validationParse(builder)
 
   ---@type Parser
   return function(value)
+    if builder.metadata.default ~= nil then
+      value = builder.metadata.default
+    end
+
     if not builder.metadata.required and value == nil then
       return value, nil
     end
