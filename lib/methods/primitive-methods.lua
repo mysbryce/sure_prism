@@ -261,3 +261,12 @@ function PrimitiveMethods.default(builder)
     return builder
   end
 end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.nullable(builder)
+  return function()
+    builder.metadata.nullable = true
+
+    return builder
+  end
+end

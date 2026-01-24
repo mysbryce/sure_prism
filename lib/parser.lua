@@ -1,3 +1,5 @@
+local NULL <const> = json.null
+
 ---@generic T
 ---@alias Parser fun(value: T): T, ValidationError | nil Parses the value
 
@@ -9,6 +11,10 @@ function validationParse(builder)
 
   ---@type Parser
   return function(value)
+    if (type(builder.metadata.nullable) == 'boolean' and builder.metadata.nullable == true) and (value == NULL) then
+      return NULL, nil
+    end
+
     if builder.metadata.default ~= nil then
       value = builder.metadata.default
     end

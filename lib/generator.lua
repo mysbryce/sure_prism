@@ -21,6 +21,7 @@
 ---@field startsWith string | nil Check that target string exists on first of text
 ---@field endsWith string | nil Check that target string exists on first of text
 ---@field default unknown Default value if it's nil or undefined
+---@field nullable boolean | nil Make it can be null if it's json
 
 ---@class Validation
 ---@field validate ValidationMethod
