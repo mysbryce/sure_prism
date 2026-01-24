@@ -46,6 +46,8 @@ shared_scripts {
 
 ## Additional validation methods
 
+This is a just some additional validation methods you can find more at [docs.](https://prism.e2ends.xyz/)
+
 - `startsWith(textToSearch, errorMessage?)`
   - `textToSearch` Define text to search in the begin of text
   - Allowed on data types:
