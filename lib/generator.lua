@@ -1,3 +1,5 @@
+PLUGINS = {}
+
 -- Root class for the validation builder
 
 ---@alias ErrorMessage string | nil
@@ -40,6 +42,23 @@
 ---@class PrimitiveBuilder
 ---@field metadata PrimitiveMetadata The metadata for the primitive validation
 prism = {}
+
+---@param plugin { name: string, [string]: any }
+function prism:use(plugin)
+  if type(plugin) ~= 'table' then
+    error('Plugin must be a table')
+  end
+
+  if plugin.name == nil then
+    error('Missing name of plugin')
+  end
+
+  if PLUGINS[plugin.name] then
+    xpcall(PLUGINS[plugin.name], function()
+      error(('Plugin %s error during initial'):format(plugin.name))
+    end)
+  end
+end
 
 -- Register an export for other resources to be able to use the Prism
 exports('getPrism', function()

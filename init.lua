@@ -19,24 +19,30 @@ local LoadResourceFile = LoadResourceFile
 
 --- Must be manually updated
 local moduleRoutes = {
-  'lib/utils/table.lua',
-  'lib/utils/is-array.lua',
-  'lib/utils/validate-builder.lua',
-
-  'lib/enums.lua',
   'lib/generator.lua',
-  'lib/parsers/alphanumeric-parser.lua',
-  'lib/parsers/boolean-parser.lua',
-  'lib/parsers/array-parser.lua',
-  'lib/parsers/enum-parser.lua',
-  'lib/parsers/object-parser.lua',
-  'lib/parsers/union-parser.lua',
-  'lib/parser.lua',
 
-  'lib/methods/primitive-methods.lua',
-  'lib/methods/table-methods.lua',
+  --- [validator:utils]
+  'lib/validator/utils/table.lua',
+  'lib/validator/utils/is-array.lua',
+  'lib/validator/utils/validate-builder.lua',
+  --- [validator:root]
+  'lib/validator/enums.lua',
+  --- [validator:parsers]
+  'lib/validator/parsers/alphanumeric-parser.lua',
+  'lib/validator/parsers/boolean-parser.lua',
+  'lib/validator/parsers/array-parser.lua',
+  'lib/validator/parsers/enum-parser.lua',
+  'lib/validator/parsers/object-parser.lua',
+  'lib/validator/parsers/union-parser.lua',
+  'lib/validator/parser.lua',
+  --- [validator:methods]
+  'lib/validator/methods/primitive-methods.lua',
+  'lib/validator/methods/table-methods.lua',
+  --- [validator:root]
+  'lib/validator/primitive-builders.lua',
 
-  'lib/primitive-builders.lua',
+  --- [event:root]
+  'lib/event/use.lua',
 }
 
 ---@param module string
