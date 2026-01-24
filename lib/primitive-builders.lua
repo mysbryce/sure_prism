@@ -1,15 +1,6 @@
 ---@param options CustomOptions | nil
 function prism:string(options)
   ---@class StringChainBuilder: ChainBuilder
-  ---@field min fun(min: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a minimum value for a string
-  ---@field max fun(max: number, errorMessage: ErrorMessage): StringChainBuilder Enforces a maximum value for a string
-  ---@field startsWith fun(textToSearch: string, errorMessage: ErrorMessage): StringChainBuilder
-  ---@field endsWith fun(textToSearch: string, errorMessage: ErrorMessage): StringChainBuilder
-  ---@field email fun(errorMessage: ErrorMessage): StringChainBuilder
-  ---@field identifier fun(target: IdentifierType | IdentifierType[] | nil, errorMessage: ErrorMessage): StringChainBuilder
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): StringChainBuilder
-  ---@field nullable fun(): StringChainBuilder
-  ---@field optional fun(): StringChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
@@ -29,6 +20,7 @@ function prism:string(options)
   builder.default = PrimitiveMethods.default(builder)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   return builder
 end
@@ -36,11 +28,6 @@ end
 ---@param options CustomOptions | nil
 function prism:number(options)
   ---@class NumberChainBuilder: ChainBuilder
-  ---@field min fun(min: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a minimum value for a number
-  ---@field max fun(max: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a maximum value for a number
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): NumberChainBuilder
-  ---@field nullable fun(): NumberChainBuilder
-  ---@field optional fun(): NumberChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
@@ -56,6 +43,7 @@ function prism:number(options)
   builder.default = PrimitiveMethods.default(builder)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   return builder
 end
@@ -68,9 +56,6 @@ function prism:enum(enums, options)
   end
 
   ---@class EnumChainBuilder: ChainBuilder
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): EnumChainBuilder
-  ---@field nullable fun(): EnumChainBuilder
-  ---@field optional fun(): EnumChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
@@ -84,6 +69,7 @@ function prism:enum(enums, options)
   builder.default = PrimitiveMethods.default(builder)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   return builder
 end
@@ -91,9 +77,6 @@ end
 ---@param options CustomOptions | nil
 function prism:boolean(options)
   ---@class BooleanChainBuilder: ChainBuilder
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): BooleanChainBuilder
-  ---@field nullable fun(): BooleanChainBuilder
-  ---@field optional fun(): BooleanChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
@@ -106,6 +89,7 @@ function prism:boolean(options)
   builder.default = PrimitiveMethods.default(builder)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   return builder
 end
@@ -118,11 +102,6 @@ function prism:object(fields, options)
   end
 
   ---@class ObjectChainBuilder: ChainBuilder
-  ---@field passthrough fun(): ObjectChainBuilder Allows values that don't exist in the schema to pass through
-  ---@field catchall fun(): ObjectChainBuilder Accepts a nil value
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): ObjectChainBuilder
-  ---@field nullable fun(): ObjectChainBuilder
-  ---@field optional fun(): ObjectChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}
@@ -136,6 +115,7 @@ function prism:object(fields, options)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.default = PrimitiveMethods.default(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   ---@deprecated Please use catchall, it can be removed at any time
   builder.passthrough = TableMethods.passthrough(builder)
@@ -175,11 +155,6 @@ function prism:array(element, options)
   end
 
   ---@class ArrayChainBuilder: ChainBuilder
-  ---@field optional fun(): ArrayChainBuilder Accepts a nil value
-  ---@field min fun(min: number, errorMessage: ErrorMessage): ArrayChainBuilder Enforces a minimum length for an array
-  ---@field max fun(max: number, errorMessage: ErrorMessage): ArrayChainBuilder Enforces a maximum length for an array
-  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): ArrayChainBuilder
-  ---@field nullable fun(): ArrayChainBuilder
   local builder = {}
 
   builder.metadata = {}
@@ -196,6 +171,7 @@ function prism:array(element, options)
   builder.default = PrimitiveMethods.default(builder)
   builder.nullable = PrimitiveMethods.nullable(builder)
   builder.optional = PrimitiveMethods.optional(builder)
+  builder.transform = PrimitiveMethods.transform(builder)
 
   return builder
 end
@@ -208,7 +184,6 @@ function prism:union(builders, options)
   end
 
   ---@class UnionChainBuilder: ChainBuilder
-  ---@field optional fun(): UnionChainBuilder Accepts a nil value
   local builder = {}
 
   builder.metadata = {}

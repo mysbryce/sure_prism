@@ -3,6 +3,10 @@
 ---@return Parser
 ---@diagnostic disable-next-line: lowercase-global
 function arrayParser(builder)
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   return function(value)
     for index, item in ipairs(value) do
       local parsedValue, error = builder.metadata.element.parse(item)
@@ -19,6 +23,6 @@ function arrayParser(builder)
       value[index] = parsedValue
     end
 
-    return value, nil
+    return transform(value), nil
   end
 end

@@ -3,10 +3,14 @@
 ---@return Parser
 ---@diagnostic disable-next-line: lowercase-global
 function enumParser(builder)
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   return function(value)
     for _, enumValue in ipairs(builder.metadata.enums) do
       if enumValue == value then
-        return value, nil
+        return transform(value), nil
       end
     end
 

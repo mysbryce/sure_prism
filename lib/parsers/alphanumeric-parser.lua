@@ -3,6 +3,10 @@
 ---@return Parser
 ---@diagnostic disable-next-line: lowercase-global
 function alphanumericParser(builder)
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   return function(value)
     for _, additionalParser in ipairs(builder.metadata.additional) do
       local valueOrError = additionalParser.validate(value)
@@ -12,6 +16,6 @@ function alphanumericParser(builder)
       end
     end
 
-    return value, nil
+    return transform(value), nil
   end
 end

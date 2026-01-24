@@ -270,3 +270,18 @@ function PrimitiveMethods.nullable(builder)
     return builder
   end
 end
+
+---@param builder ChainBuilder
+function PrimitiveMethods.transform(builder)
+  ---@generic T
+  ---@param cb fun(data: T): T
+  return function(cb)
+    if type(cb) ~= 'function' then
+      error('Callback must be a function')
+    end
+
+    builder.metadata.transform = cb
+
+    return builder
+  end
+end

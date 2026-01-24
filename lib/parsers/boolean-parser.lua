@@ -3,6 +3,10 @@
 ---@return Parser
 ---@diagnostic disable-next-line: lowercase-global
 function booleanParser(builder)
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   return function(value)
     if type(value) ~= 'boolean' then
       return nil,
@@ -13,6 +17,6 @@ function booleanParser(builder)
         }
     end
 
-    return value, nil
+    return transform(value), nil
   end
 end

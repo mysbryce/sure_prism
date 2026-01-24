@@ -9,6 +9,10 @@ local NULL <const> = json.null
 function validationParse(builder)
   validateBuilder(builder)
 
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   ---@type Parser
   return function(value)
     if (type(builder.metadata.nullable) == 'boolean' and builder.metadata.nullable == true) and (value == NULL) then
@@ -20,7 +24,7 @@ function validationParse(builder)
     end
 
     if not builder.metadata.required and value == nil then
-      return value, nil
+      return transform(value), nil
     end
 
     if value == nil then

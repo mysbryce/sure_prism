@@ -3,6 +3,10 @@
 ---@return Parser
 ---@diagnostic disable-next-line: lowercase-global
 function objectParser(builder)
+  local transform = builder.metadata.transform or function(v)
+    return v
+  end
+
   return function(value)
     if not builder.metadata.passUndefined then
       for key in pairs(value) do
@@ -27,6 +31,6 @@ function objectParser(builder)
       value[key] = parsedValue
     end
 
-    return value, nil
+    return transform(value), nil
   end
 end

@@ -8,6 +8,7 @@
 ---@field invalidTypeMessage ErrorMessage The message to be returned when the validation fails
 ---@field requiredErrorMessage ErrorMessage The message to be returned when the field is required and not present
 
+---@generic T Transform data
 ---@class PrimitiveMetadata The metadata for the primitive validation
 ---@field type PrimitiveType The type of the validation
 ---@field required boolean Whether the field is required or not
@@ -22,6 +23,7 @@
 ---@field endsWith string | nil Check that target string exists on first of text
 ---@field default unknown Default value if it's nil or undefined
 ---@field nullable boolean | nil Make it can be null if it's json
+---@field transform fun(data: T): T
 
 ---@class Validation
 ---@field validate ValidationMethod
