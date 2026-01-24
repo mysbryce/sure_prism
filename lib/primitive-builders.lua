@@ -7,6 +7,7 @@ function prism:string(options)
   ---@field endsWith fun(textToSearch: string, errorMessage: ErrorMessage): StringChainBuilder
   ---@field email fun(errorMessage: ErrorMessage): StringChainBuilder
   ---@field identifier fun(target: IdentifierType | IdentifierType[] | nil, errorMessage: ErrorMessage): StringChainBuilder
+  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): StringChainBuilder
   ---@field optional fun(): StringChainBuilder Accepts a nil value
   local builder = {}
 
@@ -24,6 +25,7 @@ function prism:string(options)
   builder.endsWith = PrimitiveMethods.endsWith(builder)
   builder.email = PrimitiveMethods.email(builder)
   builder.identifier = PrimitiveMethods.identifier(builder)
+  builder.default = PrimitiveMethods.default(builder)
   builder.optional = PrimitiveMethods.optional(builder)
 
   return builder
@@ -34,6 +36,7 @@ function prism:number(options)
   ---@class NumberChainBuilder: ChainBuilder
   ---@field min fun(min: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a minimum value for a number
   ---@field max fun(max: number, errorMessage: ErrorMessage): NumberChainBuilder Enforces a maximum value for a number
+  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): NumberChainBuilder
   ---@field optional fun(): NumberChainBuilder Accepts a nil value
   local builder = {}
 
@@ -47,6 +50,7 @@ function prism:number(options)
   builder.parse = validationParse(builder)
   builder.min = PrimitiveMethods.min(builder)
   builder.max = PrimitiveMethods.max(builder)
+  builder.default = PrimitiveMethods.default(builder)
   builder.optional = PrimitiveMethods.optional(builder)
 
   return builder
@@ -60,6 +64,7 @@ function prism:enum(enums, options)
   end
 
   ---@class EnumChainBuilder: ChainBuilder
+  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): BooleanChainBuilder
   ---@field optional fun(): EnumChainBuilder Accepts a nil value
   local builder = {}
 
@@ -71,6 +76,7 @@ function prism:enum(enums, options)
   builder.metadata.options = options or {}
 
   builder.parse = validationParse(builder)
+  builder.default = PrimitiveMethods.default(builder)
   builder.optional = PrimitiveMethods.optional(builder)
 
   return builder
@@ -79,6 +85,7 @@ end
 ---@param options CustomOptions | nil
 function prism:boolean(options)
   ---@class BooleanChainBuilder: ChainBuilder
+  ---@field default fun(defaultValue: unknown, errorMessage: ErrorMessage): BooleanChainBuilder
   ---@field optional fun(): BooleanChainBuilder Accepts a nil value
   local builder = {}
 
@@ -89,6 +96,7 @@ function prism:boolean(options)
   builder.metadata.options = options or {}
 
   builder.parse = validationParse(builder)
+  builder.default = PrimitiveMethods.default(builder)
   builder.optional = PrimitiveMethods.optional(builder)
 
   return builder
