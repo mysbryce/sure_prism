@@ -3,7 +3,7 @@ PLUGINS = {}
 -- Root class for the validation builder
 
 ---@alias ErrorMessage string | nil
----@alias PrimitiveType "string" | "number" | "object" | "array" | "boolean" | "enum" | "union"
+---@alias PrimitiveType "string" | "number" | "object" | "array" | "boolean" | "enum" | "union" | "extends"
 ---@alias ValidationMethod fun(value: any): boolean | ValidationError The function to validate the value, if string is returned, the validation failed
 
 ---@class CustomOptions The custom options for the validation
