@@ -1,4 +1,4 @@
-PLUGINS = {}
+local PLUGINS = {}
 
 -- Root class for the validation builder
 
@@ -21,8 +21,8 @@ PLUGINS = {}
 ---@field element ChainBuilder | nil The element of the array
 ---@field enums string[] | nil The enums for the validation
 ---@field unionBuilders ChainBuilder[] | nil The builders for the union
----@field startsWith string | nil Check that target string exists on first of text
----@field endsWith string | nil Check that target string exists on first of text
+---@field startsWith string | nil Check that target string exists at start of text
+---@field endsWith string | nil Check that target string exists at end of text
 ---@field default unknown Default value if it's nil or undefined
 ---@field nullable boolean | nil Make it can be null if it's json
 ---@field transform fun(data: T): T
@@ -43,7 +43,7 @@ PLUGINS = {}
 ---@field metadata PrimitiveMetadata The metadata for the primitive validation
 prism = {}
 
----@param plugin { name: string, [string]: any }
+---@param plugin { name: string, init: fun()?, [string]: any }
 function prism:use(plugin)
   if type(plugin) ~= 'table' then
     error('Plugin must be a table')
@@ -54,9 +54,17 @@ function prism:use(plugin)
   end
 
   if PLUGINS[plugin.name] then
-    xpcall(PLUGINS[plugin.name], function()
-      error(('Plugin %s error during initial'):format(plugin.name))
-    end)
+    return
+  end
+
+  PLUGINS[plugin.name] = plugin
+
+  if type(plugin.init) == 'function' then
+    local ok, err = xpcall(plugin.init, debug.traceback)
+    if not ok then
+      PLUGINS[plugin.name] = nil
+      error(('Plugin %s error during initialization: %s'):format(plugin.name, err))
+    end
   end
 end
 

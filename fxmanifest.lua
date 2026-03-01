@@ -8,17 +8,17 @@ version '1.2.0'
 description 'A validation builder for lua'
 
 shared_scripts {
-  'lib/utils/*.lua',
+  'lib/validator/utils/*.lua',
 
-  'lib/enums.lua',
+  'lib/validator/enums.lua',
   'lib/generator.lua',
-  'lib/parsers/*.lua',
-  'lib/parser.lua',
+  'lib/validator/parsers/*.lua',
+  'lib/validator/parser.lua',
 
-  'lib/methods/primitive-methods.lua',
-  'lib/methods/table-methods.lua',
+  'lib/validator/methods/primitive-methods.lua',
+  'lib/validator/methods/table-methods.lua',
 
-  'lib/primitive-builders.lua',
+  'lib/validator/primitive-builders.lua',
 
   'init.lua'
 }

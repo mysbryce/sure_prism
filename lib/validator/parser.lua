@@ -19,7 +19,7 @@ function validationParse(builder)
       return NULL, nil
     end
 
-    if builder.metadata.default ~= nil then
+    if value == nil and builder.metadata.default ~= nil then
       value = builder.metadata.default
     end
 
@@ -58,31 +58,28 @@ function validationParse(builder)
         }
     end
 
-    local isValueAnArray = isArray(value)
-    local valueType = type(value)
-
-    -- Additional validation to check wether value is an actual array
+    -- Additional validation to check whether value is an actual array
     if builder.metadata.type == 'array' then
-      if not isValueAnArray then
+      if not isArray(value) then
         return nil,
           {
             path = '',
             code = ValidationCodes.InvalidType,
             message = builder.metadata.options.invalidTypeMessage
-              or ('Invalid type. Received: %s, expected: array'):format(valueType == 'table' and 'object' or valueType),
+              or ('Invalid type. Received: %s, expected: array'):format(type(value) == 'table' and 'object' or type(value)),
           }
       end
     end
 
-    -- Additional validation to check wether value is an actual object
+    -- Additional validation to check whether value is an actual object
     if builder.metadata.type == 'object' then
-      if isValueAnArray and #value > 0 then
+      if isArray(value) and #value > 0 then
         return nil,
           {
             path = '',
             code = ValidationCodes.InvalidType,
             message = builder.metadata.options.invalidTypeMessage
-              or ('Invalid type. Received: %s, expected: object'):format(valueType == 'table' and 'array' or valueType),
+              or ('Invalid type. Received: %s, expected: object'):format(type(value) == 'table' and 'array' or type(value)),
           }
       end
     end
@@ -132,7 +129,5 @@ function validationParse(builder)
         Please open an issue at `https://github.com/mysbryce/sure_prism/issues/new`
         with the validation chain that caused this error and the error code.
     ]])
-
-    return nil, nil
   end
 end

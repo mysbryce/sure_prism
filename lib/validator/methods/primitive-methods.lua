@@ -116,7 +116,7 @@ function PrimitiveMethods.startsWith(builder)
     ---@type Validation
     local validation = {
       validate = function(value)
-        if not value:sub(1, #textToSearch) == textToSearch then
+        if value:sub(1, #textToSearch) ~= textToSearch then
           return {
             path = '',
             code = ValidationCodes.MissingStartsWith,
@@ -148,7 +148,7 @@ function PrimitiveMethods.endsWith(builder)
     ---@type Validation
     local validation = {
       validate = function(value)
-        if not value:sub(1, #textToSearch) == textToSearch then
+        if value:sub(-#textToSearch) ~= textToSearch then
           return {
             path = '',
             code = ValidationCodes.MissingEndsWith,
@@ -237,7 +237,7 @@ function PrimitiveMethods.identifier(builder)
           return {
             path = '',
             code = ValidationCodes.InvalidIdentifier,
-            message = errorMessage or ('Not found target identifier. Expected: %s, Input: %s'):format(target, value),
+            message = errorMessage or ('Not found target identifier. Expected: %s, Input: %s'):format(table.concat(targets, ', '), value),
           }
         end
 
